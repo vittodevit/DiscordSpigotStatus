@@ -17,7 +17,10 @@
           "name": "Whitelist:",
           "value": ":lock: Chiedi aggiunta in **#:video_game:games**"
         }
-      ]
+      ],"footer": {
+      "text": "Ultimo aggiornamento"
+    },
+      "timestamp": "%s"
     }
   ]
 }

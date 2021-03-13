@@ -4,21 +4,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
 public class DiscordSpigotStatus extends JavaPlugin {
-    private boolean loadcomplete = false;
+    private boolean loadcomplete, autosend = false;
+    DiscordSender ds = null;
     @Override
     public void onEnable(){
         getLogger().info("Loading configuration...");
         //ensuring config file is present
         this.saveDefaultConfig();
         FileConfiguration conf = this.getConfig();
-        DiscordSender ds = null;
+        //checking if config is valid
         if(conf.getString("discord_webhook") != "none") {
             ds = new DiscordSender(
                     conf.getString("server_ip"),
                     conf.getString("discord_webhook")
             );
             loadcomplete = true;
-            if (conf.getBoolean("autosend")) {
+            autosend = conf.getBoolean("autosend");
+            if (autosend) {
                 ds.sendOn();
             }
             //register commands
@@ -26,6 +28,7 @@ public class DiscordSpigotStatus extends JavaPlugin {
             this.getCommand("dss-on").setExecutor(new InvalidConfigResponder());
             this.getCommand("dss-off").setExecutor(new InvalidConfigResponder());
         }else{
+            //register invalid config handler
             this.getCommand("dss-on").setExecutor(new InvalidConfigResponder());
             this.getCommand("dss-off").setExecutor(new InvalidConfigResponder());
         }
@@ -36,8 +39,10 @@ public class DiscordSpigotStatus extends JavaPlugin {
 
     @Override
     public void onDisable(){
-        //if config is ok
-            //send message
+        if(loadcomplete && autosend){
+            ds.sendOff();
+            getLogger().info("Shutdown message sent.");
+        }
         getLogger().info("Plugin has been unloaded.");
     }
 }
