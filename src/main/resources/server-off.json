@@ -3,11 +3,11 @@
   "embeds": [
     {
       "title": "Stato server Minecraft:",
-      "color": 65300,
+      "color": 16711680,
       "fields": [
         {
           "name": "Stato server:",
-          "value": ":white_check_mark: ONLINE"
+          "value": ":no_entry: Offline"
         },
         {
           "name": "Indirizzo IP:",
