@@ -1,3 +1,39 @@
-name: MavenGitTest
+name: DiscordSpigotStatus
 version: 1.0
-main: it.mrbackslash.mavengittest.MavenGitTest
+main: it.mrbackslash.discordspigotstatus.DiscordSpigotStatus
+api-version: 1.16.2
+load: POSTWORLD
+author: Vittorio "mrbackslash" Lo Mele
+website: https://github.com/mrBackSlash-it/DiscordSpigotStatus
+
+commands:
+  dss-on:
+    description: Sends the "Server ON" message
+    permission: dss.dss-on
+    usage: §4§l[!] §r§4Wrong syntax, use /dss-on
+  dss-off:
+    description: Sends the "Server OFF" message
+    permission: dss.dss-off
+    usage: §4§l[!] §r§4Wrong syntax, use /dss-off
+  dss-info:
+    description: Plugin info
+    permission: dss.dss-info
+    usage: §4§l[!] §r§4Wrong syntax, use /dss-info
+
+permissions:
+  dss.*:
+    description : Wildcard
+    default: op
+    children:
+      dss.dss-on: true
+      dss.dss-off: true
+      dss.dss-info: true
+  dss.dss-on:
+    description : /dss-on
+    default: op
+  dss.dss-off:
+    description : /dss-off
+    default: op
+  dss.dss-info:
+    description: /dss-info
+    default: op
