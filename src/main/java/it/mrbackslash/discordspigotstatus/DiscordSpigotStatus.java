@@ -13,7 +13,7 @@ public class DiscordSpigotStatus extends JavaPlugin {
         this.saveDefaultConfig();
         FileConfiguration conf = this.getConfig();
         //checking if config is valid
-        if(conf.getString("discord_webhook") != "none") {
+        if(!conf.getString("discord_webhook").equals("none")) {
             ds = new DiscordSender(
                     conf.getString("server_ip"),
                     conf.getString("discord_webhook")
@@ -21,7 +21,9 @@ public class DiscordSpigotStatus extends JavaPlugin {
             loadcomplete = true;
             autosend = conf.getBoolean("autosend");
             if (autosend) {
-                ds.sendOn();
+                if(!ds.sendOn()){
+                    getLogger().warning("Unable to send 'online' message! Check your configuration...");
+                }
             }
             //register commands
             //TODO: Register actual commands
@@ -31,6 +33,8 @@ public class DiscordSpigotStatus extends JavaPlugin {
             //register invalid config handler
             this.getCommand("dss-on").setExecutor(new InvalidConfigResponder());
             this.getCommand("dss-off").setExecutor(new InvalidConfigResponder());
+            getLogger().warning("Invalid configuration file!");
+
         }
         this.getCommand("dss-info").setExecutor(new InfoCommand(
                 this.getDescription().getVersion()
@@ -40,8 +44,11 @@ public class DiscordSpigotStatus extends JavaPlugin {
     @Override
     public void onDisable(){
         if(loadcomplete && autosend){
-            ds.sendOff();
-            getLogger().info("Shutdown message sent.");
+            if(!ds.sendOff()){
+                getLogger().warning("Unable to send 'offline' message! Check your configuration...");
+            }else {
+                getLogger().info("Shutdown message sent.");
+            }
         }
         getLogger().info("Plugin has been unloaded.");
     }

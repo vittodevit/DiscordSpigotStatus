@@ -1,7 +1,7 @@
 name: DiscordSpigotStatus
 version: 1.0
 main: it.mrbackslash.discordspigotstatus.DiscordSpigotStatus
-api-version: 1.16.2
+#api-version: 1.16
 load: POSTWORLD
 author: Vittorio "mrbackslash" Lo Mele
 website: https://github.com/mrBackSlash-it/DiscordSpigotStatus
