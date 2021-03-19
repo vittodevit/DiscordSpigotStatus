@@ -4,8 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.awt.event.WindowFocusListener;
-
 public class InfoCommand implements CommandExecutor {
     private String vers;
     InfoCommand(String version){

@@ -2,12 +2,8 @@ package it.mrbackslash.discordspigotstatus;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
@@ -21,7 +17,8 @@ public class DiscordSender {
         Unirest.setTimeouts(0, 0);
         pwebhook = webhook;
         pip = ip;
-        //read templates
+        //read templates from jar
+        //POSSIBLE FEATURE: Editable templates in plugin folder
         try{
             InputStream son = Bukkit.getPluginManager().getPlugin("DiscordSpigotStatus").getResource("server-on.json");
             InputStream soff = Bukkit.getPluginManager().getPlugin("DiscordSpigotStatus").getResource("server-off.json");
@@ -44,6 +41,7 @@ public class DiscordSender {
                     .header("Content-Type", "application/json")
                     .body(String.format(serverOn, pip, timestampString))
                     .asString();
+            //check for 204 empty
             if(response.getStatus() == 204){
                 return true;
             }else {
