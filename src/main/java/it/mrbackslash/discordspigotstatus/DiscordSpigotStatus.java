@@ -26,9 +26,8 @@ public class DiscordSpigotStatus extends JavaPlugin {
                 }
             }
             //register commands
-            //TODO: Register actual commands
-            this.getCommand("dss-on").setExecutor(new InvalidConfigResponder());
-            this.getCommand("dss-off").setExecutor(new InvalidConfigResponder());
+            this.getCommand("dss-on").setExecutor(new DiscordOnCommand());
+            this.getCommand("dss-off").setExecutor(new DiscordOffCommand());
         }else{
             //register invalid config handler
             this.getCommand("dss-on").setExecutor(new InvalidConfigResponder());
