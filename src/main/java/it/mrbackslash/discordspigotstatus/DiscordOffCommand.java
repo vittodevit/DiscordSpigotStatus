@@ -6,6 +6,12 @@ import org.bukkit.command.CommandSender;
 
 public class DiscordOffCommand implements CommandExecutor {
 
+    private DiscordSender ds = null;
+
+    DiscordOffCommand(DiscordSender o){
+        ds = o;
+    }
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         sender.sendMessage("§9§l[i] §r§aPlaceholder!");
         return true;
