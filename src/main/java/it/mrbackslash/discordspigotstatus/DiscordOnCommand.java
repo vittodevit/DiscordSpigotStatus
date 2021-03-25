@@ -13,7 +13,14 @@ public class DiscordOnCommand implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        sender.sendMessage("§9§l[i] §r§aPlaceholder!");
+        if(args.length != 0){
+            return false;
+        }
+        if(ds.sendOn()){
+            sender.sendMessage("§9§l[i] §r§aMessage sent successfully!");
+        }else{
+            sender.sendMessage("§c§l[i] §r§cUnable to send your message, check your configuration...");
+        }
         return true;
     }
 
