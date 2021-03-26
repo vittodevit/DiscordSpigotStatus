@@ -17,7 +17,7 @@ public class DiscordOnCommand implements CommandExecutor {
             return false;
         }
         if(ds.sendOn()){
-            sender.sendMessage("§9§l[i] §r§aMessage sent successfully!");
+            sender.sendMessage("§a§l[i] §r§aMessage sent successfully!");
         }else{
             sender.sendMessage("§c§l[i] §r§cUnable to send your message, check your configuration...");
         }
